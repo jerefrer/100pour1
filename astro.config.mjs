@@ -7,11 +7,10 @@ import rehypeSlug from "rehype-slug";
 import NetlifyCMS from "astro-netlify-cms";
 import astroI18next from "astro-i18next";
 import alpinejs from "@astrojs/alpinejs";
-import AstroPWA from "@vite-pwa/astro";
 
 // https://astro.build/config
 export default defineConfig({
-	site: "https://astros.zank.studio",
+	site: "https://precious-douhua-d34b41.netlify.app",
 	vite: {
 		define: {
 			__DATE__: `'${new Date().toISOString()}'`,
@@ -23,18 +22,17 @@ export default defineConfig({
 		NetlifyCMS({
 			config: {
 				backend: {
-					name: "github",
-					repo: "zankhq/astros",
+					name: "git-gateway",
+					repo: "jerefrer/100pour1",
 					branch: "main",
-					base_url: "https://astros.zank.studio",
-					auth_endpoint: "/api/auth",
+					base_url: "https://precious-douhua-d34b41.netlify.app"
 				},
 				media_folder: "public/images",
 				public_folder: "/images",
 				i18n: {
 					structure: "multiple_folders",
-					locales: ["en", "it"],
-					default_locale: "en",
+					locales: ["fr", "en"],
+					default_locale: "fr",
 				},
 				collections: [
 					// Content collections
@@ -120,49 +118,9 @@ export default defineConfig({
 					},
 				],
 			},
-			disableIdentityWidgetInjection: true,
 		}),
 		astroI18next(),
 		alpinejs(),
-		AstroPWA({
-			mode: "production",
-			base: "/",
-			scope: "/",
-			includeAssets: ["favicon.svg"],
-			registerType: "autoUpdate",
-			manifest: {
-				name: "Astros - Starter Template for Astro with Tailwind CSS",
-				short_name: "Astros",
-				theme_color: "#ffffff",
-				icons: [
-					{
-						src: "pwa-192x192.png",
-						sizes: "192x192",
-						type: "image/png",
-					},
-					{
-						src: "pwa-512x512.png",
-						sizes: "512x512",
-						type: "image/png",
-					},
-					{
-						src: "pwa-512x512.png",
-						sizes: "512x512",
-						type: "image/png",
-						purpose: "any maskable",
-					},
-				],
-			},
-			workbox: {
-				navigateFallback: "/404",
-				globPatterns: ["*.js"],
-			},
-			devOptions: {
-				enabled: true,
-				navigateFallbackAllowlist: [/^\/404$/],
-				suppressWarnings: true,
-			},
-		}),
 	],
 	markdown: {
 		rehypePlugins: [
